@@ -20,8 +20,8 @@ block content
 			each rating in ratings
 				label #[input#inputRating(type="radio", name="rating", value=rating, checked=movie.rating==rating)] #{rating}
 		p
-			button#btnSubmit(type="submit") submit
-			input#btnCancel(type="button", onclick="goBack()", value="cancel")
+			button#btnSubmit.btn.btn-primary(type="submit") submit
+			input#btnCancel.btn.btn-default(type="button", onclick="goBack()", value="cancel")
 
 	script.
 		function goBack() {
