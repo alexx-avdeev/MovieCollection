@@ -1,0 +1,29 @@
+extends ../layout
+
+block content
+	h1.
+		#{title}
+	form#formMovie(name="movie", method="post", action="/movies" + (movie._id ? '/' + movie._id : ''))
+		if (movie._id)
+			input(type='hidden',value='PUT',name='_method')
+		p Title:
+			input#inputTitle(type="text", placeholder="movie title", name="title", value=movie.title)
+		p Format:
+			select#inputFormat(placeholder="movie format", name="format")
+				each format in formats
+					option(selected=movie.format == format) #{format}
+		p Length:
+			input#inputLength(type="number", placeholder="1", name="length", value=movie.length)
+		p Release Year:
+			input#inputReleaseYear(type="number", placeholder="1801", name="releaseYear", value=movie.releaseYear)
+		p Rating:
+			each rating in ratings
+				label #[input#inputRating(type="radio", name="rating", value=rating, checked=movie.rating==rating)] #{rating}
+		p
+			button#btnSubmit(type="submit") submit
+			input#btnCancel(type="button", onclick="goBack()", value="cancel")
+
+	script.
+		function goBack() {
+			window.location.href = '/movies'
+		}

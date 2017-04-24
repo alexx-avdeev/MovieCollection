@@ -25,7 +25,7 @@ var movieSchema = new mongoose.Schema({
   },
   rating: {
     type: Number,
-    min: [1, 'Rating can not be less than 1'],
+    min: 1,
     max: [5, 'Rating can not be more than 5'],
     default: null
   }
