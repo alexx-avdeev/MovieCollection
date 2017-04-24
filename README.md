@@ -1,0 +1,3 @@
+# MovieCollection
+
+NodeJS + mongo playground
