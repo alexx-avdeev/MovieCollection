@@ -1,21 +1,54 @@
 extends ../layout
 
+block additional_stylesheets
+    link(href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css", rel="stylesheet")
+
 block content
     div.container
-        h2.
+        div.row
+            h2.
             #{title}
-        table
-            tbody
-                each movie, i in movies
-                    tr
-                        td
-                            a(href='/movies/' + movie._id) #{movie.title}
-                        td= movie.format
-                        td= movie.length
-                        td= movie.releaseYear
-                        td= movie.rating
-                        td
-                            form(action='/movies/' + movie._id, method='post', enctype='application/x-www-form-urlencoded')
-                                input(type='hidden', value='DELETE', name='_method')
-                                button.btn.btn-danger(type='submit').
-                                    Delete
+        div.row
+            div.col-md-3
+                p 
+                    h4 What is Lorem Ipsum? 
+                        p Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            div.col-md-9
+                table#movieTable.table.table-striped.table-bordered.display(cellspacing="0", width="100%")
+                    thead
+                        tr
+                            th Title
+                            th Format
+                            th Length
+                            th Release Year
+                            th Rating
+                            th Remove
+                    tbody
+                        each movie, i in movies
+                            tr
+                                td.text-center
+                                    a(href='/movies/' + movie._id) #{movie.title}
+                                td= movie.format
+                                td= movie.length
+                                td= movie.releaseYear
+                                td= movie.rating
+                                td
+                                    form(action='/movies/' + movie._id, method='post', enctype='application/x-www-form-urlencoded')
+                                        input(type='hidden', value='DELETE', name='_method')
+                                        button.btn.btn-danger.btn-sm(type='submit').
+                                            Delete
+
+block additional_scripts
+    script(src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js")
+    script(src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js")
+    script(src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js")
+    script(src="https://cdn.datatables.net/responsive/2.1.1/js/responsive.bootstrap.min.js")
+    script.
+        $(document).ready(function() {
+            $('#movieTable').DataTable({
+                "columnDefs": [
+                    { "width": "20%", "targets": [0, 1, 3] },
+                    { "width": "10%", "targets": [2, 4, 5] }
+                ]
+            });
+        });
