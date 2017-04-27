@@ -30,7 +30,7 @@ block content
                                 td
                                     a(href='/movies/' + movie._id) #{movie.title}
                                 td= movie.format
-                                td= movie.length
+                                td= Math.floor(movie.length/60) + ' h ' + (movie.length - 60 * Math.floor(movie.length/60)) + ' m'
                                 td= movie.releaseYear
                                 td= movie.rating
                                 td
